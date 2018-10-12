@@ -25,6 +25,7 @@
   "dependencies": {
     "jquery": "^3.3.1",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "react-foundation": "^0.9.6"
   }
 }
