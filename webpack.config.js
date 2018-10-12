@@ -1,7 +1,8 @@
 const path = require("path");
+
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const CleanWebPackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: "./src/react-app.js",
@@ -13,13 +14,19 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/react-app.html",
             filename: "react-app.html",
-            minify: true
-    }),
-    new CopyWebpackPlugin([
+            minify: false,
+            favicon: './src/favicon.ico',
+            inject: true
+        }),
+        new CopyWebpackPlugin([
             { from: './src/static' }
-    ])
-  ],
-  module: {
+        ]),
+        new CleanWebPackPlugin(
+                    [ './build' ], 
+                    { root: path.resolve(__dirname)}
+        )
+    ],
+    module: {
         rules: [
             {
                 test: /\.js$/,
@@ -33,5 +40,5 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
-  }
+    }
 };
