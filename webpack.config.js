@@ -1,11 +1,24 @@
 const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/react-app.js",
   output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "index_bundle.js"
+    path: path.join(__dirname, "/build"),
+    filename: "react-app.js"
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/react-app.html",
+      filename: "react-app.html",
+      minify: true
+    }),
+    new CopyWebpackPlugin([
+            { from: './src/static' }
+    ])
+  ],
   module: {
     rules: [
       {
@@ -17,7 +30,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   }
