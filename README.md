@@ -7,6 +7,7 @@ Very simple react.js sample =)
     npm run-script build
 
 Init procedure:
+
     mkdir react-hello
     cd  react-hello
     npm init
