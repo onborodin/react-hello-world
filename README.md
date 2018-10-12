@@ -1,5 +1,5 @@
 
-= React.JS Hello World
+==React.JS Hello World
 
 Very simple react.js sample =)
 
