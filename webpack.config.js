@@ -3,9 +3,11 @@ const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebPackPlugin = require('clean-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+
 
 module.exports = {
-    entry: "./src/react-app.js",
+    entry: "./src/react-app.jsx",
     output: {
         path: path.join(__dirname, "/build"),
         filename: "react-app.js"
@@ -24,15 +26,19 @@ module.exports = {
         new CleanWebPackPlugin(
                     [ './build' ], 
                     { root: path.resolve(__dirname)}
-        )
+        ),
+        new HardSourceWebpackPlugin()
     ],
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader"
+                    loader: "babel-loader",
+                    options: {
+                        cacheDirectory: true
+                    }
                 },
             },
             {
@@ -40,5 +46,8 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
+    },
+    resolve: {
+        extensions: ['.js', '.jsx'],
     }
 };
